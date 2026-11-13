@@ -1,0 +1,667 @@
+<html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>Career Recommendation</title>
+
+
+  <style>
+
+    body {
+
+      font-family: Arial, sans-serif;
+
+      background: #f5f3ff;
+
+      margin: 0;
+
+      padding: 40px 0;
+
+      color: #333;
+
+    }
+
+
+    .card {
+
+      max-width: 780px;
+
+      margin: auto;
+
+      background: white;
+
+      padding: 35px;
+
+      border-radius: 20px;
+
+      box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.08);
+
+    }
+
+
+    h1 {
+
+      color: #4b3f8f;
+
+      text-align: center;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    .welcome {
+
+      text-align: center;
+
+      color: #666;
+
+    }
+
+
+    /* =========================
+       CAREER RESULT
+       ========================= */
+
+    .result {
+
+      background: #eeebfb;
+
+      border-radius: 16px;
+
+      padding: 28px;
+
+      margin: 25px 0;
+
+      text-align: center;
+
+    }
+
+
+    .result h2 {
+
+      color: #6b5fb5;
+
+      margin: 0 0 15px;
+
+      font-size: 28px;
+
+    }
+
+
+    .score {
+
+      font-size: 20px;
+
+      color: #4b3f8f;
+
+    }
+
+
+    /* =========================
+       SECTIONS
+       ========================= */
+
+    .section {
+
+      background: #faf9ff;
+
+      border-radius: 15px;
+
+      padding: 22px;
+
+      margin-top: 20px;
+
+      text-align: left;
+
+      border: 1px solid #eeeafa;
+
+    }
+
+
+    .section h2 {
+
+      color: #6b5fb5;
+
+      margin-top: 0;
+
+    }
+
+
+    .section ul,
+    .section ol {
+
+      padding-left: 25px;
+
+      line-height: 1.8;
+
+    }
+
+
+    .section li {
+
+      margin-bottom: 7px;
+
+    }
+
+
+    /* =========================
+       COMPANY NAME
+       ========================= */
+
+    .company-name {
+
+      color: #4b3f8f;
+
+      font-size: 23px;
+
+      font-weight: bold;
+
+      margin-bottom: 15px;
+
+    }
+
+
+    /* =========================
+       PHASE BOX
+       ========================= */
+
+    .phase-box {
+
+      background: white;
+
+      border-left: 5px solid #8e84c9;
+
+      padding: 15px 18px;
+
+      margin: 12px 0;
+
+      border-radius: 10px;
+
+    }
+
+
+    .phase-title {
+
+      color: #4b3f8f;
+
+      font-weight: bold;
+
+      font-size: 17px;
+
+      margin-bottom: 6px;
+
+    }
+
+
+    .phase-focus {
+
+      color: #555;
+
+      line-height: 1.6;
+
+    }
+
+
+    /* =========================
+       SKILL BOX
+       ========================= */
+
+    .skill-box {
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 20px;
+
+      margin-top: 15px;
+
+    }
+
+
+    .skill-column {
+
+      background: white;
+
+      padding: 18px;
+
+      border-radius: 12px;
+
+      border: 1px solid #eeeafa;
+
+    }
+
+
+    .skill-column h3 {
+
+      color: #6b5fb5;
+
+      margin-top: 0;
+
+    }
+
+
+    .skill-column ul {
+
+      margin-bottom: 0;
+
+    }
+
+
+    /* =========================
+       DETAILS
+       ========================= */
+
+    .details {
+
+      background: #f7f5ff;
+
+      border-radius: 15px;
+
+      padding: 20px;
+
+      margin-top: 20px;
+
+    }
+
+
+    .details p {
+
+      margin: 9px 0;
+
+    }
+
+
+    /* =========================
+       BUTTON
+       ========================= */
+
+    .btn-container {
+
+      text-align: center;
+
+    }
+
+
+    a.btn {
+
+      display: inline-block;
+
+      margin-top: 28px;
+
+      padding: 12px 28px;
+
+      background: #8e84c9;
+
+      color: white;
+
+      border-radius: 24px;
+
+      text-decoration: none;
+
+    }
+
+
+    a.btn:hover {
+
+      background: #756bb2;
+
+    }
+
+
+    /* =========================
+       MOBILE
+       ========================= */
+
+    @media (max-width: 650px) {
+
+      .card {
+
+        margin: 15px;
+
+        padding: 25px;
+
+      }
+
+
+      .skill-box {
+
+        grid-template-columns: 1fr;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <div class="card">
+
+
+    <!-- =========================
+         TITLE
+         ========================= -->
+
+    <h1>
+      Career Recommendation
+    </h1>
+
+
+    <p class="welcome">
+
+      Hello {{ name }}! 👋
+
+    </p>
+
+
+    <p class="welcome">
+
+      Based on your academic performance,
+      interests, skills and preferred field,
+      our system recommends the following
+      career path.
+
+    </p>
+
+
+    <!-- =========================
+         CAREER RESULT
+         ========================= -->
+
+    <div class="result">
+
+      <h2>
+        {{ career }}
+      </h2>
+
+
+      <p class="score">
+
+        Recommendation Score:
+
+        <strong>
+          {{ score }}/20
+        </strong>
+
+      </p>
+
+    </div>
+
+
+    <!-- =========================
+         STUDENT DETAILS
+         ========================= -->
+
+    <div class="details">
+
+      <p>
+
+        <strong>
+          Interest:
+        </strong>
+
+        {{ interest }}
+
+      </p>
+
+
+      <p>
+
+        <strong>
+          Skills:
+        </strong>
+
+        {{ skill }}
+
+      </p>
+
+
+      <p>
+
+        <strong>
+          Email:
+        </strong>
+
+        {{ email }}
+
+      </p>
+
+    </div>
+
+
+    <!-- =========================
+         CAREER FOCUS
+         ========================= -->
+
+    <div class="section">
+
+      <h2>
+        🎯 What Should You Focus On?
+      </h2>
+
+
+      <p>
+
+        To prepare for a career as a
+        <strong>{{ career }}</strong>,
+        focus on the following areas:
+
+      </p>
+
+
+      <ul>
+
+        {% for item in focus_areas %}
+
+        <li>
+          {{ item }}
+        </li>
+
+        {% endfor %}
+
+      </ul>
+
+    </div>
+
+
+    <!-- =========================
+         COMPANY
+         ========================= -->
+
+    <div class="section">
+
+      <h2>
+        🏢 Company Preparation
+      </h2>
+
+
+      <p>
+        <strong>
+          Dream Company:
+        </strong>
+      </p>
+
+
+      <div class="company-name">
+
+        {{ dream_company }}
+
+      </div>
+
+
+      <!-- =========================
+           INTERVIEW ROUNDS
+           ========================= -->
+
+      <h3>
+        📌 Interview Rounds
+      </h3>
+
+
+      <ul>
+
+        {% for round in company_rounds %}
+
+        <li>
+          {{ round }}
+        </li>
+
+        {% endfor %}
+
+      </ul>
+
+
+      <!-- =========================
+           PHASE-WISE FOCUS
+           ========================= -->
+
+      <h3>
+        🎯 What to Focus on in Each Phase
+      </h3>
+
+
+      {% for item in phase_focus %}
+
+      <div class="phase-box">
+
+        <div class="phase-title">
+
+          {{ item.phase }}
+
+        </div>
+
+
+        <div class="phase-focus">
+
+          {{ item.focus }}
+
+        </div>
+
+      </div>
+
+      {% endfor %}
+
+
+      <!-- =========================
+           COMPANY SKILLS
+           ========================= -->
+
+      <h3>
+        💼 Skills Matched to the Company Interview
+      </h3>
+
+
+      <ul>
+
+        {% for skill in company_skills %}
+
+        <li>
+          {{ skill }}
+        </li>
+
+        {% endfor %}
+
+      </ul>
+
+    </div>
+
+
+    <!-- =========================
+         SKILLS TO DEVELOP
+         ========================= -->
+
+    <div class="section">
+
+      <h2>
+        🚀 Skills You Need to Develop
+      </h2>
+
+
+      <p>
+
+        Based on your recommended career,
+        you should improve the following
+        skills:
+
+      </p>
+
+
+      <ul>
+
+        {% for skill in skills_to_develop %}
+
+        <li>
+          {{ skill }}
+        </li>
+
+        {% endfor %}
+
+      </ul>
+
+    </div>
+
+
+    <!-- =========================
+         FINAL SUGGESTION
+         ========================= -->
+
+    <div class="section">
+
+      <h2>
+        📚 Preparation Suggestion
+      </h2>
+
+
+      <p>
+
+        Prepare consistently according to
+        the interview phases above.
+        Strengthen your technical skills,
+        practice aptitude and coding questions,
+        improve problem-solving ability,
+        and prepare to explain your academic
+        and project work clearly during interviews.
+
+      </p>
+
+    </div>
+
+
+    <!-- =========================
+         BUTTON
+         ========================= -->
+
+    <div class="btn-container">
+
+      <a
+        class="btn"
+        href="/student"
+      >
+        Try Another Recommendation
+      </a>
+
+    </div>
+
+
+  </div>
+
+
+</body>
+
+</html>

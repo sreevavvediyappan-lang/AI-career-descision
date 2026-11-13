@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career Assessment | AI Career Decision Support</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: "Segoe UI", Arial, sans-serif; }
+body { min-height: 100vh; background: #DCECF5; color: #243746; }
+
+/* Navigation */
+nav { height: 72px; background: #FFFFFF; display: flex; align-items: center; justify-content: space-between; padding: 0 7%; box-shadow: 0 3px 15px rgba(36,55,70,0.10); }
+.logo { font-size: 21px; font-weight: 700; color: #4C8DA8; }
+.logo span { color: #243746; }
+.home-link { text-decoration: none; color: #4C8DA8; font-size: 14px; font-weight: 600; padding: 8px 16px; border: 1px solid #D5E7EF; border-radius: 20px; transition: 0.3s; }
+.home-link:hover { background: #4C8DA8; color: #fff; }
+
+/* Layout */
+.main { width: 90%; max-width: 1120px; margin: 45px auto; }
+.page-header { text-align: center; margin-bottom: 35px; }
+.badge { display: inline-block; background: #EAF5FA; color: #4C8DA8; padding: 8px 18px; border-radius: 25px; font-size: 13px; font-weight: 600; margin-bottom: 15px; }
+.page-header h1 { font-size: 38px; color: #243746; margin-bottom: 10px; }
+.page-header h1 span { color: #4C8DA8; }
+.page-header p { max-width: 680px; margin: auto; color: #607786; font-size: 15px; line-height: 1.7; }
+
+.assessment-card { display: grid; grid-template-columns: 0.78fr 1.5fr; background: #fff; border-radius: 25px; overflow: hidden; box-shadow: 0 15px 40px rgba(36,55,70,0.14); }
+
+/* Left panel */
+.left-panel { background: #CFE6F1; padding: 45px 35px; }
+.left-panel h2 { color: #315E73; font-size: 25px; margin-bottom: 15px; }
+.left-panel > p { color: #547080; font-size: 14px; line-height: 1.7; margin-bottom: 30px; }
+.feature { display: flex; align-items: center; gap: 13px; margin-bottom: 20px; }
+.feature-icon { width: 43px; height: 43px; background: #fff; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; box-shadow: 0 3px 10px rgba(36,55,70,0.07); }
+.feature-text strong { display: block; color: #315E73; font-size: 14px; margin-bottom: 3px; }
+.feature-text small { color: #67818F; font-size: 12px; }
+.info-box { margin-top: 35px; padding: 18px; background: rgba(255,255,255,0.72); border-radius: 15px; color: #557080; font-size: 13px; line-height: 1.6; }
+
+/* Form */
+.form-area { padding: 45px; }
+.form-heading { margin-bottom: 28px; }
+.form-heading h2 { color: #243746; font-size: 23px; margin-bottom: 7px; }
+.form-heading p { color: #8495A0; font-size: 13px; }
+.section { margin-bottom: 27px; }
+.section-title { display: flex; align-items: center; gap: 9px; color: #4C8DA8; font-size: 16px; font-weight: 700; margin-bottom: 17px; }
+.section-number { width: 27px; height: 27px; background: #EAF5FA; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #4C8DA8; font-size: 12px; font-weight: 700; }
+.row { display: flex; gap: 18px; }
+.form-group { flex: 1; margin-bottom: 18px; }
+label { display: block; color: #405563; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+input, select, textarea { width: 100%; border: 1px solid #D9E5EA; background: #FBFDFF; border-radius: 11px; padding: 13px 15px; font-size: 13px; color: #344B59; outline: none; transition: 0.25s; }
+input::placeholder, textarea::placeholder { color: #A0AFB8; }
+input:focus, select:focus, textarea:focus { border-color: #4C8DA8; background: #fff; box-shadow: 0 0 0 4px rgba(76,141,168,0.12); }
+textarea { min-height: 90px; resize: vertical; }
+.hint { margin-top: 6px; color: #9AA8B0; font-size: 11px; }
+.submit-btn { width: 100%; padding: 15px; border: none; border-radius: 11px; background: #4C8DA8; color: #fff; font-size: 15px; font-weight: 700; cursor: pointer; box-shadow: 0 7px 18px rgba(76,141,168,0.25); transition: 0.25s; }
+.submit-btn:hover { background: #3B748E; transform: translateY(-2px); box-shadow: 0 10px 22px rgba(76,141,168,0.30); }
+footer { text-align: center; padding: 25px; color: #718590; font-size: 12px; }
+
+/* Responsive */
+@media (max-width: 850px) {
+  .assessment-card { grid-template-columns: 1fr; }
+  .left-panel, .form-area { padding: 35px; }
+}
+@media (max-width: 600px) {
+  nav { padding: 0 5%; }
+  .logo { font-size: 17px; }
+  .home-link { padding: 7px 12px; font-size: 12px; }
+  .main { width: 94%; margin: 30px auto; }
+  .page-header h1 { font-size: 29px; }
+  .page-header p { font-size: 14px; }
+  .row { flex-direction: column; gap: 0; }
+  .left-panel, .form-area { padding: 25px; }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo">AI <span>Career Decision Support</span></div>
+  <a href="/" class="home-link">Home</a>
+</nav>
+
+<main class="main">
+
+  <div class="page-header">
+    <div class="badge">✨ Smart Career Assessment</div>
+    <h1>Discover Your <span>Career Path</span></h1>
+    <p>Tell us about your academic performance, technical skills and interests. Our system will help identify suitable career paths based on your profile.</p>
+  </div>
+
+  <div class="assessment-card">
+
+    <!-- Left panel -->
+    <div class="left-panel">
+      <h2>Let's Get Started! 👋</h2>
+      <p>Complete this short assessment to help our system understand your academic background, skills and career interests.</p>
+
+      <div class="feature">
+        <div class="feature-icon">🎓</div>
+        <div class="feature-text"><strong>Academic Profile</strong><small>Share your academic performance</small></div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">💻</div>
+        <div class="feature-text"><strong>Technical Skills</strong><small>Tell us about your technical skills</small></div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">💡</div>
+        <div class="feature-text"><strong>Career Interests</strong><small>Tell us what interests you</small></div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🚀</div>
+        <div class="feature-text"><strong>Career Goals</strong><small>Define your future goals</small></div>
+      </div>
+
+      <div class="info-box">
+        💙 <strong>Your career journey starts here.</strong>
+        <br><br>
+        Provide accurate information so the system can generate more relevant career recommendations.
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="form-area">
+
+      <div class="form-heading">
+        <h2>Student Assessment</h2>
+        <p>Enter your details to continue.</p>
+      </div>
+
+      <form action="/student" method="POST">
+
+        <!-- Section 1 -->
+        <div class="section">
+          <div class="section-title"><span class="section-number">1</span> Personal Information</div>
+          <div class="row">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="section">
+          <div class="section-title"><span class="section-number">2</span> Academic Information</div>
+          <div class="row">
+            <div class="form-group">
+              <label for="academic_score">CGPA / Percentage</label>
+              <input type="number" id="academic_score" name="academic_score" placeholder="Example: 7.8" step="0.01" min="0" required>
+              <div class="hint">Enter your overall CGPA or percentage.</div>
+            </div>
+            <div class="form-group">
+              <label for="field">Preferred Field</label>
+              <select id="field" name="field" required>
+                <option value="">Select a field</option>
+                <option value="IT">Information Technology</option>
+                <option value="Artificial Intelligence">Artificial Intelligence</option>
+                <option value="Data Science">Data Science</option>
+                <option value="Cybersecurity">Cybersecurity</option>
+                <option value="Cloud Computing">Cloud Computing</option>
+                <option value="Web Development">Web Development</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="section">
+          <div class="section-title"><span class="section-number">3</span> Skills &amp; Interests</div>
+
+          <div class="form-group">
+            <label for="skills">Technical Skills</label>
+            <textarea id="skills" name="skills" placeholder="Example: Java, Python, SQL, HTML, CSS" required></textarea>
+            <div class="hint">Separate multiple skills with commas.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="interests">Career Interests</label>
+            <textarea id="interests" name="interests" placeholder="Example: Software Development, AI, Data Analysis" required></textarea>
+            <div class="hint">Mention the career areas you are interested in.</div>
+          </div>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="section">
+          <div class="section-title"><span class="section-number">4</span> Career Goal</div>
+
+          <div class="form-group">
+            <label for="dream_company">Dream Company</label>
+            <select id="dream_company" name="dream_company">
+              <option value="">Select a company (optional)</option>
+              <option value="TCS">TCS</option>
+              <option value="Infosys">Infosys</option>
+              <option value="Wipro">Wipro</option>
+              <option value="HCLTech">HCLTech</option>
+              <option value="Cognizant">Cognizant</option>
+              <option value="Tech Mahindra">Tech Mahindra</option>
+              <option value="Accenture">Accenture</option>
+              <option value="Capgemini">Capgemini</option>
+              <option value="Zoho">Zoho</option>
+              <option value="Amazon">Amazon</option>
+              <option value="Google">Google</option>
+              <option value="Microsoft">Microsoft</option>
+              <option value="Other">Other</option>
+            </select>
+            <div class="hint">Optional — choose your target company.</div>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Get My Career Recommendation ✨</button>
+
+      </form>
+    </div>
+
+  </div>
+</main>
+
+<footer>AI Career Decision Support System © 2026</footer>
+
+</body>
+</html>
